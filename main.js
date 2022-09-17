@@ -49,8 +49,6 @@ class SimulatedCPU {
     this.registers.lastLine = lines.length;
 
     while (this.registers.i < this.registers.lastLine) {
-      console.log('1');
-      
       if (/[a-zA-Z]\w+:$/.test(lines[this.registers.i])) {
         this.registers.labels[
           lines[this.registers.i].match(/\w+/)[0]
@@ -134,12 +132,16 @@ class SimulatedCPU {
     this.registers[src] = this.registers[dest] || +dest;
   }
 
-  bor(src, dest) {
-    this.registers[src] = this.registers[dest] | +dest;
+  or(arg1, arg2) {
+    this.registers[arg1] = this.registers[arg1] | +arg2;
   }
 
-  bnd(src, dest) {
-    this.registers[src] = this.registers[dest] & +dest;
+  and(arg1, arg2) {
+    this.registers[arg1] = this.registers[arg1] & +arg2;
+  }
+  
+  xor(arg1, arg2) {
+    this.registers[arg1] = this.registers[arg1] ^ +arg2;
   }
 
   jmp(pointer) {
